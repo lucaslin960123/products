@@ -1,10 +1,23 @@
+import os
+
 products = []
-with open('products.txt','r') as f:
-	for line in f:
+
+
+
+if os.path.isfile('products.txt'):
+	print('Found the file!')
+	with open('products.txt','r') as f:
+		for line in f:
+			if 'products,price' in line:
+				continue
 		name, price = line.strip().split(',')
 		products.append([name, price])
+	print(products)
 
-print(products)
+else:
+	print('Did not find the file')
+
+
 		
 while True:
 	name = input('Enter name of the products:')
@@ -16,8 +29,12 @@ while True:
 		p = [name, price]
 		products.append(p)
 
+
+
 for p in products:
 	print(p[0],'cost',p[1])
+
+
 
 with open('products.txt','w') as f:
 	f.write('products,price\n')
